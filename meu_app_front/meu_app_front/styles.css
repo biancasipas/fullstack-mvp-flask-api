@@ -69,13 +69,15 @@ header{
 
 .campo{
 	display:flex;
-	align-items:center;
-	gap:10px;
+	flex-direction:column; 
+	width:45%;
+	margin-bottom:15px;
 }
 
 .campo label{
-	width:150px; /* tamanho fixo */
-	color:white;
+	margin-bottom:5px;
+	font-weight:500;
+	color:#fff;
 }
 
 /* BOTÃO */
