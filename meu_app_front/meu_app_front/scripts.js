@@ -4,13 +4,16 @@
   --------------------------------------------------------------------------------------
 */
 const getList = async () => {
-  let url = 'http://127.0.0.1:5000/produtos';
+  let url = 'http://127.0.0.1:5000/pacientes';
+
   fetch(url, {
     method: 'get',
   })
     .then((response) => response.json())
     .then((data) => {
-      data.produtos.forEach(item => insertList(item.nome, item.quantidade, item.valor))
+      data.pacientes.forEach(item => 
+        insertList(item.nome, item.cpf, item.data_registro)
+      );
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -19,24 +22,25 @@ const getList = async () => {
 
 /*
   --------------------------------------------------------------------------------------
-  Chamada da função para carregamento inicial dos dados
+  Carregamento inicial dos dados
   --------------------------------------------------------------------------------------
 */
-getList()
-
+getList();
 
 /*
   --------------------------------------------------------------------------------------
-  Função para colocar um item na lista do servidor via requisição POST
+  POST: adicionar paciente no servidor
   --------------------------------------------------------------------------------------
 */
-const postItem = async (inputProduct, inputQuantity, inputPrice) => {
+const postItem = async (inputNome, inputCpf, inputData) => {
   const formData = new FormData();
-  formData.append('nome', inputProduct);
-  formData.append('quantidade', inputQuantity);
-  formData.append('valor', inputPrice);
 
-  let url = 'http://127.0.0.1:5000/produto';
+  formData.append('nome', inputNome);
+  formData.append('cpf', inputCpf);
+  formData.append('data_registro', inputData);
+
+  let url = 'http://127.0.0.1:5000/paciente';
+
   fetch(url, {
     method: 'post',
     body: formData
@@ -47,51 +51,30 @@ const postItem = async (inputProduct, inputQuantity, inputPrice) => {
     });
 }
 
-
 /*
   --------------------------------------------------------------------------------------
-  Função para criar um botão close para cada item da lista
+  Botão de remover (X)
   --------------------------------------------------------------------------------------
 */
 const insertButton = (parent) => {
   let span = document.createElement("span");
   let txt = document.createTextNode("\u00D7");
+
   span.className = "close";
   span.appendChild(txt);
   parent.appendChild(span);
 }
 
-
 /*
   --------------------------------------------------------------------------------------
-  Função para remover um item da lista de acordo com o click no botão close
+  DELETE paciente
   --------------------------------------------------------------------------------------
 */
-const removeElement = () => {
-  let close = document.getElementsByClassName("close");
-  // var table = document.getElementById('myTable');
-  let i;
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-      let div = this.parentElement.parentElement;
-      const nomeItem = div.getElementsByTagName('td')[0].innerHTML
-      if (confirm("Você tem certeza?")) {
-        div.remove()
-        deleteItem(nomeItem)
-        alert("Removido!")
-      }
-    }
-  }
-}
+const deleteItem = (nome) => {
+  console.log(nome);
 
-/*
-  --------------------------------------------------------------------------------------
-  Função para deletar um item da lista do servidor via requisição DELETE
-  --------------------------------------------------------------------------------------
-*/
-const deleteItem = (item) => {
-  console.log(item)
-  let url = 'http://127.0.0.1:5000/produto?nome=' + item;
+  let url = 'http://127.0.0.1:5000/paciente?nome=' + nome;
+
   fetch(url, {
     method: 'delete'
   })
@@ -103,32 +86,61 @@ const deleteItem = (item) => {
 
 /*
   --------------------------------------------------------------------------------------
-  Função para adicionar um novo item com nome, quantidade e valor 
+  Remover item da tabela
   --------------------------------------------------------------------------------------
 */
-const newItem = () => {
-  let inputProduct = document.getElementById("newInput").value;
-  let inputQuantity = document.getElementById("newQuantity").value;
-  let inputPrice = document.getElementById("newPrice").value;
+const removeElement = () => {
+  let close = document.getElementsByClassName("close");
 
-  if (inputProduct === '') {
-    alert("Escreva o nome de um item!");
-  } else if (isNaN(inputQuantity) || isNaN(inputPrice)) {
-    alert("Quantidade e valor precisam ser números!");
-  } else {
-    insertList(inputProduct, inputQuantity, inputPrice)
-    postItem(inputProduct, inputQuantity, inputPrice)
-    alert("Item adicionado!")
+  for (let i = 0; i < close.length; i++) {
+    close[i].onclick = function () {
+
+      let row = this.parentElement.parentElement;
+      const nomePaciente = row.getElementsByTagName('td')[0].innerHTML;
+
+      if (confirm("Tem certeza que deseja remover este paciente?")) {
+        row.remove();
+        deleteItem(nomePaciente);
+        alert("Paciente removido!");
+      }
+    }
   }
 }
 
 /*
   --------------------------------------------------------------------------------------
-  Função para inserir items na lista apresentada
+  Adicionar novo paciente
   --------------------------------------------------------------------------------------
 */
-const insertList = (nameProduct, quantity, price) => {
-  var item = [nameProduct, quantity, price]
+const newItem = () => {
+  let inputNome = document.getElementById("newInput").value;
+  let inputCpf = document.getElementById("newQuantity").value;
+  let inputData = document.getElementById("newPrice").value;
+
+  if (inputNome === '') {
+    alert("Digite o nome do paciente!");
+  }
+  else if (inputCpf === '') {
+    alert("Digite o CPF do paciente!");
+  }
+  else if (inputData === '') {
+    alert("Selecione a data de registro!");
+  }
+  else {
+    insertList(inputNome, inputCpf, inputData);
+    postItem(inputNome, inputCpf, inputData);
+    alert("Paciente adicionado!");
+  }
+}
+
+/*
+  --------------------------------------------------------------------------------------
+  Inserir paciente na tabela
+  --------------------------------------------------------------------------------------
+*/
+const insertList = (nome, cpf, data) => {
+  var item = [nome, cpf, data];
+
   var table = document.getElementById('myTable');
   var row = table.insertRow();
 
@@ -136,10 +148,13 @@ const insertList = (nameProduct, quantity, price) => {
     var cel = row.insertCell(i);
     cel.textContent = item[i];
   }
-  insertButton(row.insertCell(-1))
+
+  insertButton(row.insertCell(-1));
+
+  // limpar campos
   document.getElementById("newInput").value = "";
   document.getElementById("newQuantity").value = "";
   document.getElementById("newPrice").value = "";
 
-  removeElement()
+  removeElement();
 }
