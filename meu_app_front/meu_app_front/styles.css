@@ -1,134 +1,142 @@
-body,
-ul,
-li {
-    font-family: tahoma;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    background-color: rgb(225, 222, 199);
+body{
+	margin:0;
+	color:#fff;
+	font:600 16px/18px 'Open Sans',sans-serif;
+
+	/* FUNDO */
+	background:url(https://www.grupomedcof.com.br/blog/wp-content/uploads/2024/07/Blog-MedCof-26-2-1024x576.png) no-repeat center;
+	background-size:cover;
+
+	/* CENTRALIZAR TUDO */
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	min-height:100vh;
 }
 
-header {
-    background-color: rgb(225, 222, 199);
-    text-align: center;
-    position: relative;
-    width: 100%;
+/* CONTAINER PRINCIPAL (IGUAL AO LOGIN-WRAP) */
+.container{
+	width:90%;
+	max-width:900px;
+	background:rgba(40,57,101,.9);
+	padding:30px;
+	border-radius:15px;
+	box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
 
-.title {
-    color: white;
-    width: 100%;
-    background-color: rgb(35, 32, 24);
-    display: inline-block;
-    padding: 2px 0px;
-    position: sticky;
-    top: 0px;
+/* HEADER */
+header{
+	text-align:center;
+	
 }
 
-.banner {
-    height: 300px;
-    overflow: hidden;
+.title h1{
+	margin:0;
+	font-size:28px;
 }
 
-.banner img {
-    margin: 0px 0px 0px 0px;
-    width: 100%;
+.descricao{
+	margin-top:10px;
+	font-size:14px;
+	color:#ccc;
 }
 
-.newItem {
-    background-color: rgb(225, 222, 199);
-    padding: 30px 40px;
-    color: white;
-    display: flex;
-    justify-content: center;
+/* FORMULÁRIO MAIS EMBAIXO */
+.newItem{
+	margin-top:20px;
 }
 
-.newItem:after {
-    content: "";
-    display: table;
-    clear: both;
+/* FORMULÁRIO */
+.newItem{
+	margin-top:20px;
+	display:flex;
+	flex-direction:column; 
+	align-items:center;
+	gap:10px;
 }
 
-#newInput {
-    margin: 0;
-    border: 1px solid rgb(35, 32, 24);
-    width: 25%;
-    padding: 10px;
-    font-size: 16px;
+#newInput,
+#newQuantity,
+#newPrice{
+    flex:1;
+	border:none;
+	padding:12px;
+	border-radius:25px;
+	background:rgba(255,255,255,.2);
+	color:white;
+	outline:none;
 }
 
-#newQuantity {
-    margin: 0;
-    border: 1px solid rgb(35, 32, 24);
-    width: 8%;
-    padding: 10px;
-    font-size: 16px;
+.campo{
+	display:flex;
+	align-items:center;
+	gap:10px;
 }
 
-#newPrice {
-    margin: 0;
-    border: 1px solid rgb(35, 32, 24);
-    width: 5%;
-    padding: 10px;
-    font-size: 16px;
+.campo label{
+	width:150px; /* tamanho fixo */
+	color:white;
 }
 
-
-.addBtn {
-    padding: 9px 10px;
-    background-color: rgb(35, 32, 24);
-    color: white;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-    border-radius: 2px;
+/* BOTÃO */
+.addBtn{
+	padding:12px 20px;
+	background:#1161ee;
+	color:white;
+	border:none;
+	border-radius:25px;
+	cursor:pointer;
+	transition:0.3s;
 }
 
-.addBtn:hover {
-    background-color: #2ab53a;
-    color: white;
+.addBtn:hover{
+	background:#0d4edb;
 }
 
-.items {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.close:hover {
-    color: #f44336;
-    font-weight: bolder;
-}
-
-table,
-th,
-td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    cursor: pointer;
-    position: relative;
-    padding: 12px 8px 12px 10px;
-    font-size: 18px;
-    transition: 0.2s;
-    text-align: start;
+/* TABELA */
+.items{
+	margin-top:20px;
+	display:flex;
+	justify-content:center;
 }
 
 table{
-    background-color: white;
-    width: 50%;
+	width:100%;
+	border-collapse:collapse;
+	background:rgba(255,255,255,0.1);
+	backdrop-filter:blur(6px);
+	border-radius:10px;
+	overflow:hidden;
+	color:white;
 }
 
-tr:nth-child(odd){
-    background-color: #eee;
+/* CABEÇALHO */
+th{
+	background:rgba(0,0,0,0.6);
+	padding:12px;
 }
 
-th:nth-child(1){
-    width: 80%;
+/* LINHAS */
+td{
+	padding:10px;
 }
 
-tr:hover {
-    background: rgb(200, 199, 199);
+/* ZEBRA */
+tr:nth-child(even){
+	background:rgba(255,255,255,0.05);
 }
 
+/* HOVER */
+tr:hover{
+	background:rgba(255,255,255,0.2);
+}
+
+/* BOTÃO X */
+.close{
+	cursor:pointer;
+	font-weight:bold;
+}
+
+.close:hover{
+	color:#ff4d4d;
+}
