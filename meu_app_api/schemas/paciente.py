@@ -6,6 +6,7 @@ class PacienteSchema(BaseModel):
     nome: str
     idade: int
     peso: float
+    
 
 
 class PacienteBuscaSchema(BaseModel):
@@ -26,3 +27,6 @@ class PacienteViewSchema(BaseModel):
     peso: float
     total_consultas: int
     consultas: List[dict]
+
+class PacientePathSchema(BaseModel):
+    paciente_id: int

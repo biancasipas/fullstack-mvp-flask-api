@@ -1,12 +1,13 @@
 const API_URL = "http://127.0.0.1:5000";
 
 /*
-GET
+GET - LISTAR PACIENTES
 */
 const getList = () => {
     fetch(`${API_URL}/paciente`)
         .then(res => res.json())
         .then(data => {
+
             console.log("RETORNO BACKEND:", data);
 
             const tabela = document.getElementById("listaPacientes");
@@ -14,11 +15,12 @@ const getList = () => {
 
             data.pacientes.forEach(p => insertList(p));
         })
-        .catch(err => console.error(err));
+        .catch(err => console.error("ERRO GET:", err));
 };
 
+
 /*
-POST
+POST - CRIAR PACIENTE
 */
 const postItem = (nome, idade, peso) => {
 
@@ -30,13 +32,12 @@ const postItem = (nome, idade, peso) => {
 
     console.log("ENVIANDO:", data);
 
-    // 🔥 VALIDAÇÃO FORTE (ESSENCIAL)
     if (!data.nome || isNaN(data.idade) || isNaN(data.peso)) {
         alert("Preencha corretamente todos os campos!");
         return;
     }
 
-    fetch("http://127.0.0.1:5000/paciente", {
+    fetch(`${API_URL}/paciente`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -44,35 +45,59 @@ const postItem = (nome, idade, peso) => {
         body: JSON.stringify(data)
     })
     .then(async (res) => {
+
         const text = await res.text();
         console.log("STATUS:", res.status);
         console.log("RESPOSTA:", text);
 
         if (!res.ok) {
-            alert("Erro 422 - veja o console");
+            alert("Erro ao criar paciente");
             return;
         }
 
         getList();
     })
-    .catch(err => console.error("ERRO:", err));
+    .catch(err => console.error("ERRO POST:", err));
 };
 
+
 /*
-DELETE
+DELETE - REMOVER PACIENTE
 */
 const deleteItem = (id) => {
+
     fetch(`${API_URL}/paciente/${id}`, {
         method: "DELETE"
     })
-    .then(() => getList())
-    .catch(err => console.error(err));
+    .then(async (res) => {
+
+        const text = await res.text();
+        let data;
+
+        try {
+            data = JSON.parse(text);
+        } catch {
+            console.error("Resposta inválida:", text);
+            alert("Erro inesperado no servidor");
+            return;
+        }
+
+        if (!res.ok) {
+            alert(data.erro || "Erro ao deletar paciente");
+            return;
+        }
+
+        getList();
+    })
+    .catch(err => console.error("ERRO DELETE:", err));
 };
 
+
 /*
-INSERT TABLE
+INSERIR NA TABELA
 */
 const insertList = (p) => {
+
     const tabela = document.getElementById("listaPacientes");
 
     const row = tabela.insertRow();
@@ -82,13 +107,15 @@ const insertList = (p) => {
     row.insertCell(2).innerHTML = p.peso;
 
     row.insertCell(3).innerHTML =
-        `<button class="close" onclick="deleteItem(${p.id})">X</button>`;
+        `<button onclick="deleteItem(${p.id})">X</button>`;
 };
 
+
 /*
-CREATE
+CRIAR PACIENTE (FORM)
 */
 const criarPaciente = () => {
+
     const nome = document.getElementById("nome").value;
     const idade = document.getElementById("idade").value;
     const peso = document.getElementById("peso").value;
@@ -105,11 +132,10 @@ const criarPaciente = () => {
     document.getElementById("peso").value = "";
 };
 
+
 /*
 INIT
 */
-getList();
-
 window.onload = () => {
     getList();
 };
