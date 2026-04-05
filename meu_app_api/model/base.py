@@ -1,15 +1,11 @@
-from sqlalchemy_utils import database_exists, create_database
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 import os
-from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
 db_path = "database/"
-
-if not os.path.exists(db_path):
-    os.makedirs(db_path)
+os.makedirs(db_path, exist_ok=True)
 
 db_url = f"sqlite:///{db_path}db.sqlite3"
 
@@ -17,7 +13,6 @@ engine = create_engine(db_url, echo=False)
 
 Session = sessionmaker(bind=engine)
 
-if not database_exists(engine.url):
-    create_database(engine.url)
-
-Base.metadata.create_all(engine)
+# cria tabelas depois que os models forem importados
+def init_db():
+    Base.metadata.create_all(engine)

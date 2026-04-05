@@ -1,17 +1,18 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DATABASE_URL = "sqlite:///db.sqlite3"
+DATABASE_URL = "sqlite:///database/db.sqlite3"
 
-engine = create_engine(DATABASE_URL, echo=True)
+engine = create_engine(DATABASE_URL, echo=False)
 
 Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
 
-from model.base import Base
+# importa models para registrar no metadata
 from model.paciente import Paciente
 from model.consulta import Consulta
 
-# cria as tabelas
-Base.metadata.create_all(engine)
+
+def init_db():
+    Base.metadata.create_all(bind=engine)

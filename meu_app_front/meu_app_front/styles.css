@@ -1,144 +1,131 @@
-body{
-	margin:0;
-	color:#fff;
-	font:600 16px/18px 'Open Sans',sans-serif;
+body {
+    margin: 0;
+    color: #fff;
+    font: 600 16px/18px 'Open Sans', sans-serif;
 
-	/* FUNDO */
-	background:url(https://www.grupomedcof.com.br/blog/wp-content/uploads/2024/07/Blog-MedCof-26-2-1024x576.png) no-repeat center;
-	background-size:cover;
+    /* FUNDO */
+    background: url(https://www.grupomedcof.com.br/blog/wp-content/uploads/2024/07/Blog-MedCof-26-2-1024x576.png) no-repeat center;
+    background-size: cover;
 
-	/* CENTRALIZAR TUDO */
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	min-height:100vh;
+    /* CENTRALIZAÇÃO */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-/* CONTAINER PRINCIPAL (IGUAL AO LOGIN-WRAP) */
-.container{
-	width:90%;
-	max-width:900px;
-	background:rgba(40,57,101,.9);
-	padding:30px;
-	border-radius:15px;
-	box-shadow:0 10px 30px rgba(0,0,0,0.5);
+/* CONTAINER PRINCIPAL */
+.container {
+    width: 90%;
+    max-width: 900px;
+    background: rgba(40, 57, 101, 0.92);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* HEADER */
-header{
-	text-align:center;
-	
+header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.title h1{
-	margin:0;
-	font-size:28px;
+header h1 {
+    margin: 0;
+    font-size: 28px;
 }
 
-.descricao{
-	margin-top:10px;
-	font-size:14px;
-	color:#ccc;
+header p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ccc;
 }
 
-/* FORMULÁRIO MAIS EMBAIXO */
-.newItem{
-	margin-top:20px;
+/* FORM */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
-/* FORMULÁRIO */
-.newItem{
-	margin-top:20px;
-	display:flex;
-	flex-direction:column; 
-	align-items:center;
-	gap:10px;
+.form div {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
 }
 
-#newInput,
-#newQuantity,
-#newPrice{
-    flex:1;
-	border:none;
-	padding:12px;
-	border-radius:25px;
-	background:rgba(255,255,255,.2);
-	color:white;
-	outline:none;
+.form label {
+    margin-bottom: 5px;
+    font-size: 14px;
 }
 
-.campo{
-	display:flex;
-	flex-direction:column; 
-	width:45%;
-	margin-bottom:15px;
-}
-
-.campo label{
-	margin-bottom:5px;
-	font-weight:500;
-	color:#fff;
+/* INPUTS */
+input {
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
 }
 
 /* BOTÃO */
-.addBtn{
-	padding:12px 20px;
-	background:#1161ee;
-	color:white;
-	border:none;
-	border-radius:25px;
-	cursor:pointer;
-	transition:0.3s;
+button {
+    padding: 12px 25px;
+    background: #1161ee;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.addBtn:hover{
-	background:#0d4edb;
+button:hover {
+    background: #0d4edb;
 }
 
 /* TABELA */
-.items{
-	margin-top:20px;
-	display:flex;
-	justify-content:center;
-}
-
-table{
-	width:100%;
-	border-collapse:collapse;
-	background:rgba(255,255,255,0.1);
-	backdrop-filter:blur(6px);
-	border-radius:10px;
-	overflow:hidden;
-	color:white;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 /* CABEÇALHO */
-th{
-	background:rgba(0,0,0,0.6);
-	padding:12px;
+th {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 12px;
 }
 
 /* LINHAS */
-td{
-	padding:10px;
+td {
+    padding: 10px;
+    text-align: center;
 }
 
 /* ZEBRA */
-tr:nth-child(even){
-	background:rgba(255,255,255,0.05);
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* HOVER */
-tr:hover{
-	background:rgba(255,255,255,0.2);
+tr:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
-/* BOTÃO X */
-.close{
-	cursor:pointer;
-	font-weight:bold;
+/* BOTÃO DELETE */
+.close {
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
 }
 
-.close:hover{
-	color:#ff4d4d;
+.close:hover {
+    color: #ff4d4d;
 }
