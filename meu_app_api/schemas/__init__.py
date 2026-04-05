@@ -6,3 +6,4 @@ from schemas.paciente import (
 
 from schemas.consulta import ConsultaSchema
 from schemas.error import ErrorSchema
+from schemas.paciente import PacienteBuscaSchema

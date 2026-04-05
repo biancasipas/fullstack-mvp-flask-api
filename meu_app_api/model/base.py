@@ -5,8 +5,6 @@ import os
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
-from model.paciente import Paciente
-from model.consulta import Consulta
 
 db_path = "database/"
 

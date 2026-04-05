@@ -1,7 +1,6 @@
 from flask_openapi3 import OpenAPI, Info, Tag
 from flask import redirect
 from flask_cors import CORS
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from contextlib import contextmanager
@@ -30,7 +29,7 @@ class PacienteListResponse(BaseModel):
     total: int
     pagina: int
     limite: int
-    pacientes: List[dict]  # ✅ corrigido
+    pacientes: List[dict]
 
 class ErrorResponse(BaseModel):
     erro: str
@@ -78,10 +77,10 @@ def home():
 def add_paciente(form: PacienteSchema):
     with get_db_session() as session:
         if paciente_duplicado(session, form.nome):
-            return ErrorResponse(erro=f"Paciente '{form.nome}' já existe"), 409
+            return ErrorResponse(erro=f"Paciente '{form.nome}' já existe").dict(), 409
 
         if not (0 <= form.idade <= 120):
-            return ErrorResponse(erro="Idade inválida"), 400
+            return ErrorResponse(erro="Idade inválida").dict(), 400
 
         paciente = Paciente(
             nome=form.nome.strip().title(),
@@ -90,7 +89,7 @@ def add_paciente(form: PacienteSchema):
         )
 
         session.add(paciente)
-        session.flush()  # ✅ garante ID
+        session.flush()
 
         logger.info(f"Paciente criado: {paciente.nome} (ID: {paciente.id})")
 
@@ -101,25 +100,30 @@ def add_paciente(form: PacienteSchema):
             idade=paciente.idade,
             peso=f"{paciente.peso}kg",
             criado_em=datetime.now().isoformat()
-        ), 201
+        ).dict(), 201
 
 # 🔍 Listar pacientes
 @app.get("/pacientes", tags=[paciente_tag])
-def get_pacientes():
+def get_pacientes(query: PacienteBuscaSchema = PacienteBuscaSchema()):
     with get_db_session() as session:
         q = session.query(Paciente)
 
+        # filtro opcional
         if query.nome:
             q = q.filter(func.lower(Paciente.nome).contains(query.nome.lower()))
 
+        # paginação segura
+        limit = getattr(query, "limit", 10)
+        skip = getattr(query, "skip", 0)
+
         total = q.count()
-        pacientes = q.limit(query.limit).offset(query.skip).all()
+        pacientes = q.limit(limit).offset(skip).all()
 
         return PacienteListResponse(
             sucesso=True,
             total=total,
-            pagina=(query.skip // query.limit) + 1,
-            limite=query.limit,
+            pagina=(skip // limit) + 1,
+            limite=limit,
             pacientes=[
                 {
                     "id": p.id,
@@ -128,7 +132,7 @@ def get_pacientes():
                     "peso": f"{p.peso}kg"
                 } for p in pacientes
             ]
-        ), 200
+        ).dict(), 200
 
 # 🗑️ Deletar paciente
 @app.delete("/paciente", tags=[paciente_tag])
@@ -139,13 +143,13 @@ def del_paciente(query: PacienteBuscaSchema):
         ).first()
 
         if not paciente:
-            return ErrorResponse(erro="Paciente não encontrado"), 404
+            return ErrorResponse(erro="Paciente não encontrado").dict(), 404
 
         session.delete(paciente)
 
         logger.info(f"Paciente removido: {paciente.nome}")
 
-        return ResponseBase(sucesso=True), 200
+        return ResponseBase(sucesso=True).dict(), 200
 
 # 🩺 Adicionar consulta
 @app.post("/consulta", tags=[consulta_tag])
@@ -166,15 +170,15 @@ def add_consulta(form: ConsultaSchema):
 
             logger.info(f"Consulta adicionada para: {paciente.nome}")
 
-            return ResponseBase(sucesso=True), 201
+            return ResponseBase(sucesso=True).dict(), 201
 
         except ValueError as e:
-            return ErrorResponse(erro=str(e)), 404
+            return ErrorResponse(erro=str(e)).dict(), 404
 
 # ❤️ Health check
 @app.get("/health")
 def health():
-    return ResponseBase(sucesso=True), 200
+    return ResponseBase(sucesso=True).dict(), 200
 
 # ==================== RUN ====================
 if __name__ == "__main__":

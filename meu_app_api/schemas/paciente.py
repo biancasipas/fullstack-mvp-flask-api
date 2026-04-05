@@ -9,7 +9,9 @@ class PacienteSchema(BaseModel):
 
 
 class PacienteBuscaSchema(BaseModel):
-    nome: str
+    nome: Optional[str] = None
+    limit: int = 10
+    skip: int = 0
 
 
 class ConsultaSchema(BaseModel):
