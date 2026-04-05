@@ -21,15 +21,41 @@ const getList = () => {
 POST
 */
 const postItem = (nome, idade, peso) => {
-    const data = { nome, idade: Number(idade), peso: Number(peso) };
 
-    fetch(`${API_URL}/paciente`, {
+    const data = {
+        nome: nome.trim(),
+        idade: parseInt(idade),
+        peso: parseFloat(peso)
+    };
+
+    console.log("ENVIANDO:", data);
+
+    // 🔥 VALIDAÇÃO FORTE (ESSENCIAL)
+    if (!data.nome || isNaN(data.idade) || isNaN(data.peso)) {
+        alert("Preencha corretamente todos os campos!");
+        return;
+    }
+
+    fetch("http://127.0.0.1:5000/paciente", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(data)
     })
-    .then(() => getList())
-    .catch(err => console.error(err));
+    .then(async (res) => {
+        const text = await res.text();
+        console.log("STATUS:", res.status);
+        console.log("RESPOSTA:", text);
+
+        if (!res.ok) {
+            alert("Erro 422 - veja o console");
+            return;
+        }
+
+        getList();
+    })
+    .catch(err => console.error("ERRO:", err));
 };
 
 /*

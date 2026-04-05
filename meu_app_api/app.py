@@ -1,5 +1,6 @@
 from flask_openapi3 import OpenAPI, Info, Tag
 from flask import redirect
+from flask import request
 from flask_cors import CORS
 from sqlalchemy import func
 from contextlib import contextmanager
@@ -42,19 +43,19 @@ def home():
 
 # ==================== PACIENTE CREATE ====================
 @app.post("/paciente", tags=[paciente_tag])
-def criar_paciente(form: PacienteSchema):
+def criar_paciente():
     with get_db() as session:
 
+        data = request.get_json()
+
         paciente = Paciente(
-            nome=form.nome.strip(),
-            idade=form.idade,
-            peso=form.peso
+            nome=data["nome"].strip(),
+            idade=int(data["idade"]),
+            peso=float(data["peso"])
         )
 
         session.add(paciente)
-        session.flush()  # mantém ID disponível
-
-        logger.info(f"Paciente criado: {paciente.nome}")
+        session.flush()
 
         return {
             "sucesso": True,
