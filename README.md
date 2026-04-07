@@ -1,10 +1,8 @@
- # 🏥 Sistema Clínico MVP
+# 🏥 Sistema Clínico MVP
 
 Este pequeno projeto faz parte do material didático da disciplina **Desenvolvimento Full Stack Básico**.
 
-O objetivo é ilustrar, na prática, o desenvolvimento de uma API simples utilizando Python, aplicando os conceitos de backend, banco de dados e integração com frontend.
-
-O sistema consiste em um **MVP (Minimum Viable Product)** para gerenciamento de pacientes, contendo apenas funcionalidades essenciais para validação da proposta.
+O objetivo é demonstrar o desenvolvimento de uma API simples utilizando Python, com foco na criação de um **MVP (Minimum Viable Product)** para gerenciamento de pacientes.
 
 ---
 
@@ -30,41 +28,47 @@ O sistema consiste em um **MVP (Minimum Viable Product)** para gerenciamento de 
 
 ## 💻 Como executar
 
-Será necessário ter todas as bibliotecas Python listadas no arquivo `requirements.txt` instaladas.
+Será necessário ter o Python instalado na máquina.
 
-Após clonar o repositório, acesse a pasta do projeto pelo terminal:
+Após clonar o repositório, siga os passos abaixo no terminal:
 
-```
+### 1. Acessar a pasta do projeto
+
+```bash
 cd meu_app_api
-```
-
-> É fortemente recomendado o uso de ambiente virtual (virtualenv).
-
-### 1. Criar ambiente virtual
-
-```
-python -m venv .venv
-```
-
-### 2. Ativar ambiente virtual (Windows)
-
-```
-.\.venv\Scripts\Activate.ps1
-```
-
-### 3. Instalar dependências
-
-```
-pip install -r requirements.txt
 ```
 
 ---
 
-## ▶️ Executando a API
+### 2. Criar ambiente virtual
 
-Para executar a aplicação:
-
+```bash
+python -m venv .venv
 ```
+
+---
+
+### 3. Ativar ambiente virtual (Windows)
+
+```bash
+.\.venv\Scripts\Activate.ps1
+```
+
+---
+
+### 4. Instalar dependências
+
+```bash
+pip install flask==2.3.3 werkzeug==2.3.7 flask-openapi3 sqlalchemy flask-cors pydantic
+```
+
+> ⚠️ Observação: versões específicas foram utilizadas para evitar conflitos entre Flask e Werkzeug.
+
+---
+
+### 5. Executar a aplicação
+
+```bash
 python app.py
 ```
 
@@ -94,6 +98,4 @@ Neste endereço é possível visualizar e testar os endpoints da API utilizando 
 
 * `POST /consulta` → Criar consulta
 
-
-
-
+---
