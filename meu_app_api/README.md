@@ -1,35 +1,99 @@
-# Minha API
+ # 🏥 Sistema Clínico MVP
 
-Este pequeno projeto faz parte do material diático da Disciplina **Desenvolvimento Full Stack Básico** 
+Este pequeno projeto faz parte do material didático da disciplina **Desenvolvimento Full Stack Básico**.
 
-O objetivo aqui é ilutsrar o conteúdo apresentado ao longo das três aulas da disciplina.
+O objetivo é ilustrar, na prática, o desenvolvimento de uma API simples utilizando Python, aplicando os conceitos de backend, banco de dados e integração com frontend.
+
+O sistema consiste em um **MVP (Minimum Viable Product)** para gerenciamento de pacientes, contendo apenas funcionalidades essenciais para validação da proposta.
 
 ---
-## Como executar 
 
+## 🚀 Funcionalidades
 
-Será necessário ter todas as libs python listadas no `requirements.txt` instaladas.
-Após clonar o repositório, é necessário ir ao diretório raiz, pelo terminal, para poder executar os comandos descritos abaixo.
+* Cadastro de pacientes
+* Listagem de pacientes
+* Exclusão de pacientes
+* Registro de consultas
 
-> É fortemente indicado o uso de ambientes virtuais do tipo [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html).
+---
+
+## 🛠️ Tecnologias utilizadas
+
+* Python
+* Flask
+* Flask OpenAPI3 (Swagger)
+* SQLAlchemy
+* SQLite
+* JavaScript
+
+---
+
+## 💻 Como executar
+
+Será necessário ter todas as bibliotecas Python listadas no arquivo `requirements.txt` instaladas.
+
+Após clonar o repositório, acesse a pasta do projeto pelo terminal:
 
 ```
-(env)$ pip install -r requirements.txt
+cd meu_app_api
 ```
 
-Este comando instala as dependências/bibliotecas, descritas no arquivo `requirements.txt`.
+> É fortemente recomendado o uso de ambiente virtual (virtualenv).
 
-Para executar a API  basta executar:
-
-```
-(env)$ flask run --host 0.0.0.0 --port 5000
-```
-
-Em modo de desenvolvimento é recomendado executar utilizando o parâmetro reload, que reiniciará o servidor
-automaticamente após uma mudança no código fonte. 
+### 1. Criar ambiente virtual
 
 ```
-(env)$ flask run --host 0.0.0.0 --port 5000 --reload
+python -m venv .venv
 ```
 
-Abra o [http://localhost:5000/#/](http://localhost:5000/#/) no navegador para verificar o status da API em execução.
+### 2. Ativar ambiente virtual (Windows)
+
+```
+.\.venv\Scripts\Activate.ps1
+```
+
+### 3. Instalar dependências
+
+```
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Executando a API
+
+Para executar a aplicação:
+
+```
+python app.py
+```
+
+---
+
+## 🌐 Acessando a API
+
+Abra o navegador e acesse:
+
+```
+http://127.0.0.1:5000/openapi
+```
+
+Neste endereço é possível visualizar e testar os endpoints da API utilizando o Swagger.
+
+---
+
+## 📡 Endpoints
+
+### Paciente
+
+* `POST /paciente` → Criar paciente
+* `GET /paciente` → Listar pacientes
+* `DELETE /paciente/{paciente_id}` → Deletar paciente
+
+### Consulta
+
+* `POST /consulta` → Criar consulta
+
+
+
+
