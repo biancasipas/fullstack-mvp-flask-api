@@ -1,12 +1,14 @@
 from flask_openapi3 import OpenAPI, Info, Tag
-from flask import redirect, request
+from flask import redirect
 from flask_cors import CORS
 from contextlib import contextmanager
 
 from model import Session as DBSession, Paciente, Consulta
 from model.base import Base
 from model import engine
-from schemas.paciente import PacientePathSchema, ConsultaSchema
+
+from schemas.paciente import PacienteSchema, PacientePathSchema
+from schemas.consulta import ConsultaSchema
 
 from logger import logger
 
@@ -39,20 +41,44 @@ def get_db():
 def home():
     return redirect("/openapi")
 
+# ========================= GET =============================
+
+@app.get("/paciente/<int:paciente_id>", tags=[paciente_tag])
+def buscar_paciente(path: PacientePathSchema):
+
+    with get_db() as session:
+
+        paciente = session.query(Paciente).filter_by(id=path.paciente_id).first()
+
+        if not paciente:
+            return {"erro": "Paciente não encontrado"}, 404
+
+        return {
+            "id": paciente.id,
+            "nome": paciente.nome,
+            "idade": paciente.idade,
+            "peso": paciente.peso,
+            "consultas": [
+                {
+                    "id": c.id,
+                    "observacao": c.observacao
+                }
+                for c in paciente.consultas
+            ]
+        }, 200
+
 # ==================== CREATE PACIENTE ====================
 @app.post("/paciente", tags=[paciente_tag])
-def criar_paciente():
-    data = request.get_json()
+def criar_paciente(form: PacienteSchema):
 
     with get_db() as session:
         paciente = Paciente(
-            nome=data["nome"].strip(),
-            idade=int(data["idade"]),
-            peso=float(data["peso"])
+            nome=form.nome.strip(),
+            idade=form.idade,
+            peso=form.peso
         )
 
         session.add(paciente)
-        session.commit()
 
         return {
             "sucesso": True,
@@ -65,6 +91,7 @@ def criar_paciente():
 # ==================== LIST PACIENTES ====================
 @app.get("/paciente", tags=[paciente_tag])
 def listar_pacientes():
+
     with get_db() as session:
         pacientes = session.query(Paciente).all()
 
@@ -82,7 +109,7 @@ def listar_pacientes():
             ]
         }, 200
 
-# ==================== DELETE PACIENTE (CORRIGIDO) ====================
+# ==================== DELETE PACIENTE ====================
 @app.delete("/paciente/<int:paciente_id>", tags=[paciente_tag])
 def deletar_paciente(path: PacientePathSchema):
 
@@ -94,7 +121,6 @@ def deletar_paciente(path: PacientePathSchema):
             return {"erro": "Paciente não encontrado"}, 404
 
         session.delete(paciente)
-        session.commit()
 
         return {
             "sucesso": True,

@@ -1,68 +1,69 @@
- # 🏥 Sistema Clínico MVP
+## 💻 Como executar o projeto (via terminal)
 
-Este pequeno projeto faz parte do material didático da disciplina **Desenvolvimento Full Stack Básico**.
+Siga os passos abaixo para executar a aplicação corretamente:
 
-O objetivo é ilustrar, na prática, o desenvolvimento de uma API simples utilizando Python, aplicando os conceitos de backend, banco de dados e integração com frontend.
+### 🟢 1. Abrir o terminal
 
-O sistema consiste em um **MVP (Minimum Viable Product)** para gerenciamento de pacientes, contendo apenas funcionalidades essenciais para validação da proposta.
-
----
-
-## 🚀 Funcionalidades
-
-* Cadastro de pacientes
-* Listagem de pacientes
-* Exclusão de pacientes
-* Registro de consultas
-
----
-
-## 🛠️ Tecnologias utilizadas
-
-* Python
-* Flask
-* Flask OpenAPI3 (Swagger)
-* SQLAlchemy
-* SQLite
-* JavaScript
-
----
-
-## 💻 Como executar
-
-Será necessário ter todas as bibliotecas Python listadas no arquivo `requirements.txt` instaladas.
-
-Após clonar o repositório, acesse a pasta do projeto pelo terminal:
+No Windows, pressione `Win + R`, digite:
 
 ```
+powershell
+```
+
+e pressione Enter.
+
+---
+
+### 🟢 2. Acessar a pasta do projeto
+
+```
+cd Documents\fullstack-mvp-flask-api
 cd meu_app_api
 ```
 
-> É fortemente recomendado o uso de ambiente virtual (virtualenv).
+---
 
-### 1. Criar ambiente virtual
+### 🟢 3. Verificar os arquivos
+
+```
+dir
+```
+
+Deve aparecer o arquivo `app.py` na listagem.
+
+---
+
+### 🟢 4. Criar ambiente virtual
 
 ```
 python -m venv .venv
 ```
 
-### 2. Ativar ambiente virtual (Windows)
+---
+
+### 🟢 5. Ativar ambiente virtual (Windows)
 
 ```
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 3. Instalar dependências
+Após ativar, o terminal exibirá:
 
 ```
-pip install -r requirements.txt
+(.venv)
 ```
 
 ---
 
-## ▶️ Executando a API
+### 🟢 6. Instalar dependências
 
-Para executar a aplicação:
+```
+pip install flask==2.3.3 werkzeug==2.3.7 flask-openapi3 sqlalchemy flask-cors pydantic
+```
+
+---
+
+### 🟢 7. Executar a aplicação
 
 ```
 python app.py
@@ -70,7 +71,7 @@ python app.py
 
 ---
 
-## 🌐 Acessando a API
+### 🌐 8. Acessar no navegador
 
 Abra o navegador e acesse:
 
@@ -78,22 +79,5 @@ Abra o navegador e acesse:
 http://127.0.0.1:5000/openapi
 ```
 
-Neste endereço é possível visualizar e testar os endpoints da API utilizando o Swagger.
-
----
-
-## 📡 Endpoints
-
-### Paciente
-
-* `POST /paciente` → Criar paciente
-* `GET /paciente` → Listar pacientes
-* `DELETE /paciente/{paciente_id}` → Deletar paciente
-
-### Consulta
-
-* `POST /consulta` → Criar consulta
-
-
-
+Neste endereço será possível visualizar e testar a API utilizando o Swagger.
 
