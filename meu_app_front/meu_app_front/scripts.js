@@ -37,7 +37,7 @@ const postItem = (nome, idade, peso) => {
         return;
     }
 
-    fetch(`${API_URL}/paciente`, {
+    fetch(`${API_URL}/paciente_json`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

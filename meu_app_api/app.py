@@ -1,5 +1,6 @@
 from flask_openapi3 import OpenAPI, Info, Tag
 from flask import redirect
+from flask import request
 from flask_cors import CORS
 from contextlib import contextmanager
 
@@ -57,7 +58,7 @@ def buscar_paciente(path: PacientePathSchema):
             ]
         }, 200
 
-# ==================== CRIAR PACIENTE ====================
+# ==================== CRIAR PACIENTE (SWAGGER) ====================
 @app.post("/paciente", tags=[paciente_tag])
 def criar_paciente(form: PacienteSchema):
 
@@ -77,6 +78,31 @@ def criar_paciente(form: PacienteSchema):
             "nome": paciente.nome,
             "idade": paciente.idade,
             "peso": paciente.peso
+        }, 201
+
+
+# ==================== CRIAR PACIENTE (HTML / JSON) ====================
+@app.post("/paciente_json", tags=[paciente_tag])
+def criar_paciente_json():
+
+    data = request.get_json()
+
+    if not data:
+        return {"erro": "JSON inválido"}, 400
+
+    with get_db() as session:
+        paciente = Paciente(
+            nome=data["nome"].strip(),
+            idade=int(data["idade"]),
+            peso=float(data["peso"])
+        )
+
+        session.add(paciente)
+        session.flush()
+
+        return {
+            "sucesso": True,
+            "mensagem": "Paciente criado com sucesso"
         }, 201
 
 # ==================== LISTAR PACIENTES ====================
@@ -148,6 +174,6 @@ def criar_consulta(form: ConsultaSchema):
 
         return {"sucesso": True}, 201
 
-# ==================== EXECUÇÃO ====================
+# ==================== RUN ====================
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
