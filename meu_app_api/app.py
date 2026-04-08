@@ -12,10 +12,8 @@ from schemas.consulta import ConsultaSchema
 
 from logger import logger
 
-# ==================== DB INIT ====================
 Base.metadata.create_all(engine)
 
-# ==================== APP ====================
 info = Info(title="Sistema Clínico MVP", version="1.0")
 app = OpenAPI(__name__, info=info)
 CORS(app)
@@ -23,7 +21,6 @@ CORS(app)
 paciente_tag = Tag(name="Paciente")
 consulta_tag = Tag(name="Consulta")
 
-# ==================== DB SESSION ====================
 @contextmanager
 def get_db():
     session = DBSession()
@@ -35,13 +32,6 @@ def get_db():
         raise
     finally:
         session.close()
-
-# ==================== HOME ====================
-@app.get("/")
-def home():
-    return redirect("/openapi")
-
-# ========================= GET =============================
 
 @app.get("/paciente/<int:paciente_id>", tags=[paciente_tag])
 def buscar_paciente(path: PacientePathSchema):
@@ -67,7 +57,7 @@ def buscar_paciente(path: PacientePathSchema):
             ]
         }, 200
 
-# ==================== CREATE PACIENTE ====================
+# ==================== CRIAR PACIENTE ====================
 @app.post("/paciente", tags=[paciente_tag])
 def criar_paciente(form: PacienteSchema):
 
@@ -79,6 +69,7 @@ def criar_paciente(form: PacienteSchema):
         )
 
         session.add(paciente)
+        session.flush()
 
         return {
             "sucesso": True,
@@ -88,12 +79,18 @@ def criar_paciente(form: PacienteSchema):
             "peso": paciente.peso
         }, 201
 
-# ==================== LIST PACIENTES ====================
+# ==================== LISTAR PACIENTES ====================
 @app.get("/paciente", tags=[paciente_tag])
-def listar_pacientes():
+def listar_pacientes(nome: str = None):
 
     with get_db() as session:
-        pacientes = session.query(Paciente).all()
+
+        query = session.query(Paciente)
+
+        if nome:
+            query = query.filter(Paciente.nome.ilike(f"%{nome}%"))
+
+        pacientes = query.all()
 
         return {
             "sucesso": True,
@@ -109,7 +106,7 @@ def listar_pacientes():
             ]
         }, 200
 
-# ==================== DELETE PACIENTE ====================
+# ==================== DELETAR PACIENTE ====================
 @app.delete("/paciente/<int:paciente_id>", tags=[paciente_tag])
 def deletar_paciente(path: PacientePathSchema):
 
@@ -128,7 +125,7 @@ def deletar_paciente(path: PacientePathSchema):
             "id": path.paciente_id
         }, 200
 
-# ==================== CREATE CONSULTA ====================
+# ==================== CRIAR CONSULTA ====================
 @app.post("/consulta", tags=[consulta_tag])
 def criar_consulta(form: ConsultaSchema):
 
@@ -145,16 +142,12 @@ def criar_consulta(form: ConsultaSchema):
         )
 
         session.add(consulta)
+        session.flush()
 
         logger.info("Consulta criada")
 
         return {"sucesso": True}, 201
 
-# ==================== HEALTH ====================
-@app.get("/health")
-def health():
-    return {"sucesso": True}, 200
-
-# ==================== RUN ====================
+# ==================== EXECUÇÃO ====================
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
