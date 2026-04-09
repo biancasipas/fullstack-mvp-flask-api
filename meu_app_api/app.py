@@ -63,6 +63,14 @@ def buscar_paciente(path: PacientePathSchema):
 def criar_paciente(form: PacienteSchema):
 
     with get_db() as session:
+
+        paciente_existente = session.query(Paciente)\
+            .filter(Paciente.nome.ilike(form.nome.strip()))\
+            .first()
+
+        if paciente_existente:
+            return {"erro": "Paciente já cadastrado com esse nome"}, 400
+
         paciente = Paciente(
             nome=form.nome.strip(),
             idade=form.idade,
@@ -80,7 +88,6 @@ def criar_paciente(form: PacienteSchema):
             "peso": paciente.peso
         }, 201
 
-
 # ==================== CRIAR PACIENTE (HTML / JSON) ====================
 @app.post("/paciente_json", tags=[paciente_tag])
 def criar_paciente_json():
@@ -90,9 +97,20 @@ def criar_paciente_json():
     if not data:
         return {"erro": "JSON inválido"}, 400
 
+    nome = data["nome"].strip()
+
     with get_db() as session:
+
+        # 🔥 VERIFICA DUPLICADO
+        paciente_existente = session.query(Paciente)\
+            .filter(Paciente.nome.ilike(nome))\
+            .first()
+
+        if paciente_existente:
+            return {"erro": "Paciente já cadastrado com esse nome"}, 400
+
         paciente = Paciente(
-            nome=data["nome"].strip(),
+            nome=nome,
             idade=int(data["idade"]),
             peso=float(data["peso"])
         )
