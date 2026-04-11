@@ -4,12 +4,14 @@ from flask import request
 from flask_cors import CORS
 from contextlib import contextmanager
 
-from model import Session as DBSession, Paciente, Consulta
+from model.base import Session as DBSession, engine
+from model.paciente import Paciente
+from model.consulta import Consulta
 from model.base import Base
-from model import engine
+
 
 from schemas.paciente import PacienteSchema, PacientePathSchema
-from schemas.consulta import ConsultaSchema
+from schemas.paciente import ConsultaSchema
 
 from logger import logger
 
