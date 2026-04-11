@@ -101,7 +101,6 @@ def criar_paciente_json():
 
     with get_db() as session:
 
-        # 🔥 VERIFICA DUPLICADO
         paciente_existente = session.query(Paciente)\
             .filter(Paciente.nome.ilike(nome))\
             .first()
