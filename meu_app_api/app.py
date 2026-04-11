@@ -1,17 +1,16 @@
+import os
+
 from flask_openapi3 import OpenAPI, Info, Tag
-from flask import redirect
-from flask import request
+from flask import redirect, request, send_from_directory
 from flask_cors import CORS
 from contextlib import contextmanager
 
-from model.base import Session as DBSession, engine
+from model.base import Session as DBSession, engine, Base
 from model.paciente import Paciente
 from model.consulta import Consulta
-from model.base import Base
-
 
 from schemas.paciente import PacienteSchema, PacientePathSchema
-from schemas.paciente import ConsultaSchema
+from schemas.paciente import ConsultaSchema 
 
 from logger import logger
 
@@ -192,6 +191,18 @@ def criar_consulta(form: ConsultaSchema):
         logger.info("Consulta criada")
 
         return {"sucesso": True}, 201
+    
+# ==================== FRONTEND ====================
+
+@app.get("/app")
+def frontend():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+
+    front_dir = os.path.abspath(
+        os.path.join(base_dir, "..", "meu_app_front", "meu_app_front")
+    )
+
+    return send_from_directory(front_dir, "index.html")
 
 # ==================== RUN ====================
 if __name__ == "__main__":
