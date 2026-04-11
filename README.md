@@ -49,7 +49,7 @@ Funcionalidades:
 - Exibir pacientes em tabela  
 - Remover paciente  
 
-![Frontend](./meu_app_api/img/image.png)
+![Frontend](./meu_app_api/img/Front_end_clinica.png)
 
 ---
 
