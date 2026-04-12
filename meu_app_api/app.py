@@ -35,6 +35,10 @@ def get_db():
     finally:
         session.close()
 
+@app.get("/")
+def home():
+    return redirect("/openapi/")
+
 @app.get("/paciente/<int:paciente_id>", tags=[paciente_tag])
 def buscar_paciente(path: PacientePathSchema):
 
