@@ -49,6 +49,7 @@ Se você encontrar algum erro durante a execução, verifique as situações com
 
   ```bash
   cd Meu_app_api
+  ```
 
 
 
