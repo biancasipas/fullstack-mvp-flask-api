@@ -2,9 +2,9 @@
 
 O Back End do sistema é a parte responsável por toda a lógica da aplicação e pelo gerenciamento dos dados. Ele foi desenvolvido utilizando o Flask, um framework em Python, junto com Flask-OpenAPI3, que permite criar uma API documentada automaticamente com Swagger.
 
-## Como executar o projeto
+## Como executar
 
-### 1.Clonar o repositório
+### 1. Clonar o repositório
 
 ```bash
 
@@ -27,14 +27,14 @@ python -m venv venv
 venv\Scripts\activate
 
 ```
-### 3.Instalar dependência
+### 3. Instalar dependência
 
 ```bash
 
 pip install -r requirements.txt
 
 ```
-### 4.Executar a apliação
+### 4. Executar a aplicação
 
 ```bash
 
@@ -81,7 +81,7 @@ Se você encontrar algum erro durante a execução, verifique as situações com
 * **Solução:** Verifique se você está dentro da pasta correta do projeto. Utilize o comando `cd` para navegar:
 
   ```bash
-  cd Meu_app_api
+  cd meu_app_api
   ```
 
 

@@ -63,7 +63,7 @@ http://127.0.0.1:5000/openapi/swagger
 - Documentação automática da API
 
 ### Imagem do Swagger:
-![Frontend](./meu_app_api/img/swagger.png)
+![Swagger](./meu_app_api/img/swagger.png)
 
 
 
