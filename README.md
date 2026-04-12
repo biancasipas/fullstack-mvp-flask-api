@@ -1,4 +1,4 @@
-# 🏥 Sistema Clínico MVP
+# Sistema Clínico MVP
 
 Este projeto MVP foi desenvolvido utilizando **Python (Flask)**, **SQLAlchemy**, **SQLite**, **Flask OpenAPI3 (Swagger)**, além de **HTML, CSS e JavaScript** no frontend.
 
@@ -6,7 +6,7 @@ O sistema simula uma aplicação clínica simples, permitindo o gerenciamento de
 
 ---
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
 O sistema realiza operações completas de CRUD:
 
@@ -18,7 +18,7 @@ O sistema realiza operações completas de CRUD:
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - Python
 - Flask (flask_openapi3)
@@ -29,7 +29,7 @@ O sistema realiza operações completas de CRUD:
 
 ---
 
-## 💻 Frontend
+## Frontend
 
 O frontend foi desenvolvido em SPA (Single Page Application) utilizando HTML, CSS e JavaScript puro.
 
@@ -47,7 +47,7 @@ http://127.0.0.1:5000/app
 
 ---
 
-## ⚙️ Backend (API)
+## Backend (API)
 
 O backend é responsável pelas regras de negócio, rotas e integração com o banco de dados.
 
@@ -59,21 +59,21 @@ http://127.0.0.1:5000/paciente
 
 ---
 
-## 📡 Endpoints da API
+## Endpoints da API
  
-### 👤 Paciente
+### Paciente
 - POST /paciente → Criar paciente
 - POST /paciente_json → Criar paciente via JSON
 - GET /paciente → Listar pacientes
 - GET /paciente/<id> → Buscar paciente por ID
 - DELETE /paciente/<id> → Remover paciente
 
-### 🩺 Consulta
+### Consulta
 - POST /consulta → Criar consulta vinculada a paciente
 
 ---
 
-## 🗄️ Banco de Dados
+## Banco de Dados
 
 - Tipo: SQLite  
 - Arquivo gerado automaticamente: `database/db.sqlite3`
@@ -87,11 +87,11 @@ Relacionamento:
 
 ---
 
-## 💻 Como executar o projeto (via terminal)
+## Como executar o projeto (via terminal)
 
 Siga os passos abaixo para executar a aplicação corretamente:
 
-### 🟢 1. Abrir o terminal
+### 1. Abrir o terminal
 
 No Windows, pressione `Win + R`, digite:
 
@@ -103,7 +103,7 @@ e pressione Enter.
 
 ---
 
-### 🟢 2. Acessar a pasta do projeto
+### 2. Acessar a pasta do projeto
 
 ```
 cd Documents\fullstack-mvp-flask-api
@@ -112,7 +112,7 @@ cd meu_app_api
 
 ---
 
-### 🟢 3. Verificar os arquivos
+### 3. Verificar os arquivos
 
 ```
 dir
@@ -122,7 +122,7 @@ Deve aparecer o arquivo `app.py` na listagem.
 
 ---
 
-### 🟢 4. Criar ambiente virtual
+### 4. Criar ambiente virtual
 
 ```
 python -m venv .venv
@@ -130,7 +130,7 @@ python -m venv .venv
 
 ---
 
-### 🟢 5. Ativar ambiente virtual (Windows)
+### 5. Ativar ambiente virtual (Windows)
 
 ```
 .\.venv\Scripts\Activate.ps1
@@ -144,7 +144,7 @@ Após ativar, o terminal exibirá:
 
 ---
 
-### 🟢 6. Instalar dependências
+### 6. Instalar dependências
 
 ```
 pip install flask==2.3.3 werkzeug==2.3.7 flask-openapi3 sqlalchemy flask-cors pydantic
@@ -152,7 +152,7 @@ pip install flask==2.3.3 werkzeug==2.3.7 flask-openapi3 sqlalchemy flask-cors py
 
 ---
 
-### 🟢 7. Executar a aplicação
+### 7. Executar a aplicação
 
 ```
 python app.py
@@ -160,7 +160,7 @@ python app.py
 
 ---
 
-### 🌐 8. Acessar no navegador
+### 8. Acessar no navegador
 
 Abra o navegador e acesse:
 
