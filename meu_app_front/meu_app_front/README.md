@@ -27,7 +27,7 @@ O arquivo principal da aplicação é:
 
 O front-end é servido pelo próprio backend Flask através da rota:
 
-![Frontend](./meu_app_api/img/front.png)
+![Frontend](../../meu_app_api/img/front.png)
 
 -----------------------------
 ### Acesso à aplicação
