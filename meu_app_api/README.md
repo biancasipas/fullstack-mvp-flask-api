@@ -2,13 +2,46 @@
 
 O Back End do sistema é a parte responsável por toda a lógica da aplicação e pelo gerenciamento dos dados. Ele foi desenvolvido utilizando o Flask, um framework em Python, junto com Flask-OpenAPI3, que permite criar uma API documentada automaticamente com Swagger.
 
-## Como Rodar a API
+## Como executar o projeto
 
-Para iniciar o servidor, execute o comando abaixo dentro da pasta raiz do projeto:
+### 1.Clonar o repositório
 
 ```bash
-python app.py
+
+cd Documents\fullstack-mvp-flask-api
+cd meu_app_api
+
 ```
+
+### 2. Criar ambiente virtual
+
+```bash
+
+python -m venv venv
+
+```
+### Windows
+
+```bash
+
+venv\Scripts\activate
+
+```
+### 3.Instalar dependência
+
+```bash
+
+pip install -r requirements.txt
+
+```
+### 4.Executar a apliação
+
+```bash
+
+python app.py
+
+```
+
 ## Acessar no Navegador
 
 Com o servidor devidamente iniciado, você pode interagir com a API e o sistema através dos endereços abaixo:
