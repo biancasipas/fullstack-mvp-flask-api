@@ -39,6 +39,10 @@ O frontend foi desenvolvido em SPA (Single Page Application) utilizando HTML, CS
 - Remoção de pacientes
 - Integração direta com API
 
+### Swagger - Integração com a API
+
+O Swagger (OpenAPI) é utilizado para documentar e testar todas as rotas da API de forma interativa, permitindo visualizar requisições e respostas em formato JSON.
+
 ### Acesso:
 http://127.0.0.1:5000/app
 
@@ -46,7 +50,24 @@ http://127.0.0.1:5000/app
 ![Frontend](./meu_app_api/img/Front_end_clinico.png)
 
 ---
+## Swagger
+O Swagger permite visualizar todas as rotas da aplicação (GET, POST, DELETE), facilitando o teste e entendimento da API.
 
+### Acesso:
+http://127.0.0.1:5000/openapi/swagger
+
+### Funcionalidades:
+- Visualização das rotas (GET, POST, DELETE)
+- Teste direto das requisições
+- Retorno em formato JSON
+- Documentação automática da API
+
+### Imagem do Swagger:
+![Frontend](./meu_app_api/img/swagger.png)
+
+
+
+---
 ## Backend (API)
 
 O backend é responsável pelas regras de negócio, rotas e integração com o banco de dados.
