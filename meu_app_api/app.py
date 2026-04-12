@@ -37,9 +37,14 @@ def get_db():
 
 @app.get("/")
 def home():
-    return redirect("/openapi/")
+    return redirect("/openapi")
 
-@app.get("/paciente/<int:paciente_id>", tags=[paciente_tag])
+@app.get(
+    "/paciente/<int:paciente_id>",
+    tags=[paciente_tag],
+    summary="Busca paciente por ID",
+    description="Retorna os dados de um paciente específico incluindo consultas"
+)
 def buscar_paciente(path: PacientePathSchema):
 
     with get_db() as session:
@@ -64,7 +69,12 @@ def buscar_paciente(path: PacientePathSchema):
         }, 200
 
 # ==================== CRIAR PACIENTE (SWAGGER) ====================
-@app.post("/paciente", tags=[paciente_tag])
+@app.post(
+    "/paciente",
+    tags=[paciente_tag],
+    summary="Cria um novo paciente",
+    description="Adiciona um paciente no banco de dados com nome, idade e peso"
+)
 def criar_paciente(form: PacienteSchema):
 
     with get_db() as session:
@@ -128,7 +138,12 @@ def criar_paciente_json():
         }, 201
 
 # ==================== LISTAR PACIENTES ====================
-@app.get("/paciente", tags=[paciente_tag])
+@app.get(
+    "/paciente",
+    tags=[paciente_tag],
+    summary="Lista todos os pacientes",
+    description="Retorna todos os pacientes cadastrados no sistema"
+)
 def listar_pacientes(nome: str = None):
 
     with get_db() as session:
@@ -155,7 +170,12 @@ def listar_pacientes(nome: str = None):
         }, 200
 
 # ==================== DELETAR PACIENTE ====================
-@app.delete("/paciente/<int:paciente_id>", tags=[paciente_tag])
+@app.delete(
+    "/paciente/<int:paciente_id>",
+    tags=[paciente_tag],
+    summary="Remove paciente",
+    description="Exclui um paciente do sistema pelo ID"
+)
 def deletar_paciente(path: PacientePathSchema):
 
     with get_db() as session:
@@ -174,7 +194,12 @@ def deletar_paciente(path: PacientePathSchema):
         }, 200
 
 # ==================== CRIAR CONSULTA ====================
-@app.post("/consulta", tags=[consulta_tag])
+@app.post(
+    "/consulta",
+    tags=[consulta_tag],
+    summary="Cria uma consulta",
+    description="Registra uma consulta vinculada a um paciente existente"
+)
 def criar_consulta(form: ConsultaSchema):
 
     with get_db() as session:
