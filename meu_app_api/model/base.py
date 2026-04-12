@@ -13,6 +13,5 @@ engine = create_engine(db_url, echo=False)
 
 Session = sessionmaker(bind=engine)
 
-# cria tabelas depois que os models forem importados
 def init_db():
     Base.metadata.create_all(engine)
