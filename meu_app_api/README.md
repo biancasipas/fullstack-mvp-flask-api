@@ -1,44 +1,27 @@
-# Sistema Clínico MVP 🏥
+# Back end
 
-Esta é uma API Flask com documentação Swagger usando Flask-OpenAPI3.
+O Back End do sistema é a parte responsável por toda a lógica da aplicação e pelo gerenciamento dos dados. Ele foi desenvolvido utilizando o Flask, um framework em Python, junto com Flask-OpenAPI3, que permite criar uma API documentada automaticamente com Swagger.
 
-## 🚀 1. Pré-requisitos
-Antes de começar, você precisa ter:
-- Python 3.10+
-- pip instalado
-- (Recomendado) ambiente virtual venv
-
-## 2. Instalação e Configuração
-```bash
-git clone <URL_DO_REPOSITORIO>
-cd fullstack-mvp-flask-api/Meu_app_api
-
-python -m venv .venv
-
-.venv\Scripts\activate
-
-pip install -r requirements.txt
-```
-
-## 3. Como Rodar a API
+## Como Rodar a API
 
 Para iniciar o servidor, execute o comando abaixo dentro da pasta raiz do projeto:
 
 ```bash
 python app.py
 ```
-## 3. Acessar no Navegador
+## Acessar no Navegador
 
-Com o servidor iniciado, acesse:
+Com o servidor devidamente iniciado, você pode interagir com a API e o sistema através dos endereços abaixo:
 
 | Recurso | URL | Descrição |
 | :--- | :--- | :--- |
-| **Documentação Swagger** | [http://127.0.0.1:5000/openapi/](http://127.0.0.1:5000/openapi/) | Interface interativa para testar os endpoints. |
-| **Página Inicial** | [http://127.0.0.1:5000/](http://127.0.0.1:5000/) | Redirecionamento padrão da API. |
+| **Swagger (OpenAPI)** | [http://127.0.0.1:5000/openapi/](http://127.0.0.1:5000/openapi/) | Interface interativa para testar todos os endpoints da API. |
+| **Página Base** | [http://127.0.0.1:5000/](http://127.0.0.1:5000/) | Endpoint raiz da aplicação. |
+| **Frontend (HTML)** | [http://127.0.0.1:5000/app](http://127.0.0.1:5000/app) | Interface visual simples para interação com o sistema. |
 
 ---
 
-## 4. Rotas Principais
+## Rotas Principais
 
 Abaixo estão listados os principais endpoints disponíveis na API. Para detalhes sobre os parâmetros de entrada (JSON), consulte o Swagger no tópico anterior.
 
@@ -52,7 +35,7 @@ Abaixo estão listados os principais endpoints disponíveis na API. Para detalhe
 ---
 
 
-## 5. Guia de Solução de Problemas
+## Guia de Solução de Problemas
 
 Se você encontrar algum erro durante a execução, verifique as situações comuns abaixo:
 
@@ -67,16 +50,7 @@ Se você encontrar algum erro durante a execução, verifique as situações com
   ```bash
   cd Meu_app_api
 
-## 🏁 Finalização
 
-Tudo pronto! Com o servidor rodando, sua API está pronta para receber requisições.
-
-### 🚀 Atalho Rápido
-Tudo pronto! Após executar python app.py, acesse:
-
-* **Swagger:** [http://127.0.0.1:5000/openapi/](http://127.0.0.1:5000/openapi/)
-
----
 
 
 
