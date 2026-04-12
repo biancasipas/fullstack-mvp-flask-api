@@ -1,86 +1,99 @@
 # 🏥 Sistema Clínico MVP
 
-Olá, eu desenvolvi este trabalho MVP utilizando banco de dados SQLite, SQLAlchemy, Flask OpenAPI3 (Swagger), Python, HTML, CSS e JavaScript.
+Este projeto MVP foi desenvolvido utilizando **Python (Flask)**, **SQLAlchemy**, **SQLite**, **Flask OpenAPI3 (Swagger)**, além de **HTML, CSS e JavaScript** no frontend.
 
-O sistema permite o funcionamento de uma API clínica para cadastro de pacientes, contendo informações como nome, idade e peso.
-
-Através da rota:
-http://127.0.0.1:5000/paciente  
-é possível visualizar a lista de pacientes cadastrados no banco de dados.
-
-O projeto demonstra a integração entre frontend e backend. Por exemplo:
-
-- **GET** → buscar lista de pacientes  
-- **POST** → cadastrar novo paciente  
-- **DELETE** → remover paciente  
+O sistema simula uma aplicação clínica simples, permitindo o gerenciamento de pacientes e consultas, integrando frontend e backend.
 
 ---
 
 ## 🚀 Funcionalidades
 
-O sistema integra Frontend e Backend, funcionando de forma completa:
+O sistema realiza operações completas de CRUD:
 
-- Cadastro de pacientes  
-- Listagem de pacientes  
-- Exclusão de pacientes  
-- Registro de consultas  
+- Cadastro de pacientes
+- Listagem de pacientes
+- Busca de paciente por ID
+- Exclusão de pacientes
+- Registro de consultas vinculadas a pacientes
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- Python  
-- Flask  
-- Flask OpenAPI3 (Swagger)  
-- SQLAlchemy  
-- SQLite  
-- HTML, CSS e JavaScript  
+- Python
+- Flask (flask_openapi3)
+- SQLAlchemy
+- SQLite
+- Flask-CORS
+- HTML, CSS e JavaScript
 
 ---
 
 ## 💻 Frontend
 
-O frontend foi desenvolvido com HTML, CSS e JavaScript.
+O frontend foi desenvolvido em SPA (Single Page Application) utilizando HTML, CSS e JavaScript puro.
 
-Funcionalidades:
+### Funcionalidades:
+- Cadastro de pacientes (nome, idade e peso)
+- Listagem de pacientes em tabela
+- Remoção de pacientes
+- Integração direta com API
 
-- Digitar nome, idade e peso  
-- Cadastrar paciente  
-- Exibir pacientes em tabela  
-- Remover paciente  
+### Acesso:
+http://127.0.0.1:5000/app
 
+### Imagem do Frontend:
 ![Frontend](./meu_app_api/img/Front_end_clinico.png)
 
 ---
 
-## ⚙️ Backend
+## ⚙️ Backend (API)
 
-O backend é responsável pelas rotas da API e integração com o banco de dados.
+O backend é responsável pelas regras de negócio, rotas e integração com o banco de dados.
 
-Exemplo de resposta da rota `GET /paciente`:
+### Acesso à listagem de pacientes:
+http://127.0.0.1:5000/paciente
 
-```json
-{
-  "sucesso": true,
-  "total": 3,
-  "pacientes": [
-    {
-      "id": 3,
-      "nome": "Julia",
-      "idade": 23,
-      "peso": 71.0
-    },
-    {
-      "id": 4,
-      "nome": "Bianca",
-      "idade": 24,
-      "peso": 60.0
-    },
-    {
-      "id": 6,
-      "nome": "Clara",
-      "idade": 23,
-      "peso": 65.0
-    }
-  ]
-}
+### Exemplo de resposta (GET /paciente):
+![Lista de Pacientes](./meu_app_api/img/lista_paciente.png)
+
+---
+
+## 📡 Endpoints da API
+ 
+### 👤 Paciente
+- POST /paciente → Criar paciente
+- POST /paciente_json → Criar paciente via JSON
+- GET /paciente → Listar pacientes
+- GET /paciente/<id> → Buscar paciente por ID
+- DELETE /paciente/<id> → Remover paciente
+
+### 🩺 Consulta
+- POST /consulta → Criar consulta vinculada a paciente
+
+---
+
+## 🗄️ Banco de Dados
+
+- Tipo: SQLite  
+- Arquivo gerado automaticamente: `database/db.sqlite3`
+
+### Estrutura:
+- Paciente (1)
+- Consulta (N)
+
+Relacionamento:
+> Um paciente pode possuir várias consultas.
+
+---
+
+## 💻 Como Executar o Projeto
+
+### 🔧 Backend
+
+```bash id="b9x2ka"
+cd Meu_app_api
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
