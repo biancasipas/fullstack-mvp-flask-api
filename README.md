@@ -191,4 +191,8 @@ http://127.0.0.1:5000/openapi
 
 Neste endereço será possível visualizar e testar a API utilizando o Swagger.
 
+## Autora
+
+Bianca Maria
+Desenvolvedora do projeto
 
